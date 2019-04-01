@@ -1,7 +1,1 @@
-from MGP.cano import coucou
-
-
-
-
-
-print('dfze')
+from .models import Multitask_GP_Model
