@@ -3,7 +3,7 @@ import torch
 import gpytorch
 import numpy as np
 import matplotlib.pyplot as plt
-import MGP
+from MGP import MGP
 
 
 train_x = np.arange(4)/4
@@ -21,7 +21,7 @@ n_iter = 30
 learning_rate = 0.02
 
 
-model = MGP.Multitask_GP_Model((2,8,2), likelihood, kernel, learning_rate, n_iter)
+model = MGP((2,8,2), likelihood, kernel, learning_rate, n_iter)
 
 mean_popu, covar_popu = model.training_testing_mutliple_MGPs(train_x, train_y, test_x, plot=True)
 h5_name = save_mean_covar_as_h5_file(mean_popu, covar_popu)
