@@ -80,4 +80,156 @@ def generate_posterior_samples(h5_name, nb_samples_per_id):
     return output
 
 
+def change_representation_covariance_matrix(covar_matrix, num_tasks):
+
+    ''' FROM [[time_1_task_1, time_1_task_2, time_2_task_1, time_1_task_2, ...]
+        TO [[time_1_task_1, time_2_task_1,...],[time_1_task_2, time_1_task_2]]
+
+    ... or the inverse (works both ways)
+    '''
+    len_covar = covar_matrix.shape[0]
+    new_index = np.array([np.arange(i, len_covar, num_tasks) for i in range(num_tasks)]).reshape(-1)
+    new_index = np.array([[i, j] for i in new_index for j in new_index]).reshape(len_covar, len_covar, 2)
+    a = np.zeros((len_covar, len_covar))
+    for i in range(len_covar):
+        for j in range(len_covar):
+            a[i, j] = covar_matrix[new_index[i, j, 0], new_index[i, j, 1]]
+    return a
+
+def generate_samples_single_id_with_covar_matrix(gp_out_mean, covar_matrix, num_samples):
+    '''
+    :param gp_out_mean: mean of the posterior over the all x range
+    :param covar_matrix: covariance matrix of the GP over the all x range
+    :param num_tasks:
+    :param num_samples; the amount of samples per id we want
+    :return: an array of shape [num_samples, time_steps*num_tasks]
+
+    BE CAREFUL : THE OUTPUT IS OF THE FORM [[time_1_task_1, time_1_task_2, time_2,task_1, time_2_task_2, ...] * num_samples]
+    '''
+    gp_mean = np.tile(gp_out_mean.reshape(-1, 1), (1,num_samples))
+    len_covar = covar_matrix.shape[0]
+    cholesky_matrix = np.linalg.cholesky(covar_matrix + 8e-4*np.eye(len_covar))  #we add this quantity to be sure to have a positive semi definite matrix
+    posterior_samples = gp_mean + np.dot(cholesky_matrix, np.random.normal(size=(len_covar, num_samples)))
+    return posterior_samples
+
+
+def from_samples_vector_to_final_array(vector, num_tasks):
+    '''
+    :param vector: BE CAREFUL INPUT TYPE [[time_1_task_1_sample_1, time_1_task_1_sample_2], [time_1_task_2_sample_1, time_1_task_2_sample_2],
+                                         [time_2,task_1_sample_1, time_2_task_1_sample_2], ....]
+
+    :param num_tasks = number of hormonal levels for one GP
+    return : an array of shape [number of samples, number of time_steps, number of hormones]
+
+    BE CAREFUL : THE FORM OF THE INPUT
+    '''
+
+    assert(vector.shape[0]%num_tasks == 0)
+    out = vector.reshape(vector.shape[0]//num_tasks, num_tasks, vector.shape[-1])
+    out = np.swapaxes(out, 0, -1)
+    out = np.swapaxes(out, 1, -1)
+    return out
+
+
+
+def create_whole_dataset_multiple_posterior_samples(h5_data_path, num_samples):
+    '''
+
+    :param h5_data_path: take as input a h5 file with many datasets inside( y_data, y_mean, y_covar_1, y_covar_2, y_std, x_train, filters)
+     = results of the MGP on all the women
+    '''
+
+    with h5py.File(h5_data_path, 'r') as data:
+        y_data = data['y_data'][:]
+        y_mean = data['y_gp_out_mean'][:]
+        y_covar_1 = data['covar_1'][:]
+        y_covar_2 = data['covar_2'][:]
+        y_std = data['y_gp_out_std'][:]
+        x_train = data['x_train'][:]
+        filters = data['filters'][:]  # gives the points that have been selected for the GP
+
+    if 'nb_peaks_selected_' in h5_data_path:
+
+        nb_selected_points = int(h5_data_path[h5_data_path.index('selected_points_')+len('selected_points_'):h5_data_path.index('_Total_Time')])
+        nb_peaks_selected = int(h5_data_path[h5_data_path.index('nb_peaks_selected_')+len('nb_peaks_selected_'):])
+
+        samples_array = np.empty(shape = (y_mean.shape[0], num_samples) + (y_mean.shape[1:]))
+
+        for i in range(y_mean.shape[0]):
+            print('WOMEN ', i)
+            samples_1 = generate_samples_single_id_with_covar_matrix(y_mean[i,:,0:2], y_covar_1[i], num_samples)
+            samples_2 = generate_samples_single_id_with_covar_matrix(y_mean[i,:,2:5], y_covar_2[i], num_samples)
+
+            samples_1 = from_samples_vector_to_final_array(samples_1, num_tasks = 2)
+            samples_2 = from_samples_vector_to_final_array(samples_2, num_tasks = 3)
+
+            samples = np.concatenate([samples_1, samples_2], axis = -1) #concatenate along the hormonal level axis
+            samples_array[i] = samples
+
+        print(samples_array.shape)
+
+        (nb_women, nb_samples, nb_time_steps, nb_hormones) = samples_array.shape
+
+        h5_dataset = h5py.File('C:/Users/tmb2183/Desktop/myhmc/dev_tristan/Data_prediction/MGP/GP_RNN_MC/output_GP_h5_multiple_posterior_samples/'
+                               'according_Clue_DATASET_WITH_POSTERIOR_AUGMENTATION_Women_%d_T_%d_nb_samples_per_id_%d_nb_selected_points_%d_nb_peaks_selected_%d'
+                               %(y_mean.shape[0], nb_time_steps, num_samples, nb_selected_points,nb_peaks_selected), 'w')
+
+        h5_dataset.create_dataset('y_gp_out_mean', data=y_mean)
+        h5_dataset.create_dataset('y_gp_out_std', data=y_std)
+        h5_dataset.create_dataset('y_gp_all_samples', data=samples_array)
+
+        h5_dataset.create_dataset('x_train', data=x_train)
+        h5_dataset.create_dataset('filters', data=np.array(filters))
+        h5_dataset.create_dataset('y_data', data=y_data)
+        h5_dataset.close()
+
+        return samples_array
+
+
+
+    else: ### optimal_sampling
+
+        nb_selected_points = int(h5_data_path[
+                                 h5_data_path.index('selected_points_') + len('selected_points_'):h5_data_path.index(
+                                     '_Total_Time')])
+
+        samples_array = np.empty(shape=(y_mean.shape[0], num_samples) + (y_mean.shape[1:]))
+        iteration = int(h5_data_path[-1])
+
+        for i in range(y_mean.shape[0]):
+            print('WOMEN ', i)
+            samples_1 = generate_samples_single_id_with_covar_matrix(y_mean[i, :, 0:2], y_covar_1[i], num_samples)
+            samples_2 = generate_samples_single_id_with_covar_matrix(y_mean[i, :, 2:5], y_covar_2[i], num_samples)
+
+            samples_1 = from_samples_vector_to_final_array(samples_1, num_tasks=2)
+            samples_2 = from_samples_vector_to_final_array(samples_2, num_tasks=3)
+
+            samples = np.concatenate([samples_1, samples_2], axis=-1)  # concatenate along the hormonal level axis
+            samples_array[i] = samples
+
+        print(samples_array.shape)
+
+        (nb_women, nb_samples, nb_time_steps, nb_hormones) = samples_array.shape
+
+        h5_dataset = h5py.File(
+            'C:/Users/tmb2183/Desktop/myhmc/dev_tristan/Data_prediction/MGP/GP_RNN_MC/output_GP_h5_multiple_posterior_samples/'
+            'OPTIMAL_according_Clue_DATASET_WITH_POSTERIOR_AUGMENTATION_Women_%d_T_%d_nb_samples_per_id_%d_nb_selected_points_%d_iteration_%d'
+            % (y_mean.shape[0], nb_time_steps, num_samples, nb_selected_points, iteration), 'w')
+
+        h5_dataset.create_dataset('y_gp_out_mean', data=y_mean)
+        h5_dataset.create_dataset('y_gp_out_std', data=y_std)
+        h5_dataset.create_dataset('y_gp_all_samples', data=samples_array)
+
+        h5_dataset.create_dataset('x_train', data=x_train)
+        h5_dataset.create_dataset('filters', data=np.array(filters))
+        h5_dataset.create_dataset('y_data', data=y_data)
+        h5_dataset.close()
+
+        return samples_array
+
+
+
+
+
+
 

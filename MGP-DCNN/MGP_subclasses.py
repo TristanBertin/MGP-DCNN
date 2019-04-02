@@ -2,6 +2,7 @@ import torch
 import gpytorch
 import numpy as np
 import matplotlib.pyplot as plt
+import h5py
 
 
 class Multitask_GP_Model(gpytorch.models.ExactGP):
@@ -35,23 +36,6 @@ class Single_task_GP_model(gpytorch.models.ExactGP):
 
     def return_covar_matrix(self, x):
         return gpytorch.distributions.MultivariateNormal(self.mean_module(x), self.covar_module(x)).covariance_matrix
-
-
-
-def training_testing_mutliple_MGPs(self, train_x, train_y, test_x, plot=False):
-    print('\n----- TRAINING MULTIPLE MGP ------\n')
-    test_mean_array = np.empty(shape=(self.nb_individuals, self.nb_time_steps, self.nb_tasks))
-    test_covar_array = np.empty(shape=(self.nb_individuals, self.nb_time_steps * self.nb_tasks, self.nb_time_steps * self.nb_tasks))
-
-    for i in range(self.nb_individuals):
-        print('Iindividual %d/%d'%(i+1, self.nb_individuals))
-        test_mean, test_covar_matrix = self.training_testing_MGP_single_id(train_x, train_y[i], test_x, plot)
-        test_mean_array[i] = test_mean
-        test_covar_array[i] = test_covar_matrix
-
-    return test_mean_array, test_covar_array
-
-
 
 
 

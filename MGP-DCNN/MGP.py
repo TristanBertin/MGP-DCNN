@@ -1,13 +1,14 @@
 
-from MGP_methods import Multitask_GP_Model, Single_task_GP_model
+from MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
 import torch
 import gpytorch
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
+import data_processing
 
 
-class MGP():
+class Block_MGP():
 
     def __init__(self, kernel, learning_rate, n_training_iter, block_indices):
 
@@ -19,22 +20,28 @@ class MGP():
         self.number_of_block = len(block_indices)
         self.total_nb_tasks = len([item for sublist in self.block_indices for item in sublist])
 
-        self.model = [None] * self.number_of_block
-        self.likelihood = [None] * self.number_of_block
+        self.model = []
+        self.likelihood = []
         self.loss_list = []
 
 
+    def build_and_train_single_model(self, x_train, y_train, block_number=0):
+        '''
+        :param x_train: array size nb_timesteps *1, represents time
+        :param y_train: array size nb_timesteps * nb_tasks
+        :param block_number: the number of the block, starts from 0
+        :return: modifies the attributes model and likelihood according to the training data
+        '''
 
-    def build_and_train_single_model(self, x_train, y_train, nb_tasks, block_number=0):
-
-        if self.model[block_number] == None and nb_tasks == 1:
-            self.likelihood[block_number] = gpytorch.likelihoods.GaussianLikelihood()
+        nb_tasks = y_train.shape[-1]
+        if nb_tasks == 1:
+            self.likelihood.append(gpytorch.likelihoods.GaussianLikelihood())
             y_train = y_train[:,0]
-            self.model[block_number] = Single_task_GP_model(x_train, y_train, self.likelihood[block_number], self.kernel)
+            self.model.append(Single_task_GP_model(x_train, y_train, self.likelihood[block_number], self.kernel))
 
-        if self.model[block_number] == None and nb_tasks>1: #if no model has been ever trained, create a model
-            self.likelihood[block_number] = gpytorch.likelihoods.MultitaskGaussianLikelihood(num_tasks=nb_tasks)
-            self.model[block_number] = Multitask_GP_Model(x_train, y_train, self.likelihood[block_number], nb_tasks, self.kernel)
+        if nb_tasks>1: #if no model has been ever trained, create a model
+            self.likelihood.append(gpytorch.likelihoods.MultitaskGaussianLikelihood(num_tasks=nb_tasks))
+            self.model.append(Multitask_GP_Model(x_train, y_train, self.likelihood[block_number], nb_tasks, self.kernel))
 
         self.model[block_number].train()
         self.likelihood[block_number].train()
@@ -55,11 +62,24 @@ class MGP():
 
 
     def build_and_train_block_models(self, x_train, y_train):
+        '''
+        :param x_train: array size nb_timesteps *1, represents time
+        :param y_train: array size nb_timesteps * nb_tasks
+        :return: train the multiple MGP, one for each block
+        '''
         for i in range(self.number_of_block):
-            self.build_and_train_single_model(x_train, y_train[:,self.block_indices[i]], len(self.block_indices[i]), i)
+            print('### BLOCK %d ###'%i)
+            self.build_and_train_single_model(x_train, y_train[:,self.block_indices[i]], i)
 
 
     def test_block_model(self, x_test):
+        '''
+        :param x_test: array size nb_timesteps_test * 1, represents time
+        :return:  test_mean_list : the mean of the posterior MGPs
+                  test_covar_matrix_list : the psoetrior covariance matrices
+                  test_std :the standard deviation of the MGPs
+        BE CAREFUL : the outputs are list, each block has then its own mean /coavriances arrays
+        '''
 
         test_mean_list = []
         test_covar_matrix_list = []
@@ -86,6 +106,12 @@ class MGP():
 
 
     def plot_model(self, x_train, y_train, x_test):
+        '''
+        :param x_train: array size nb_timesteps * 1, represents time
+        :param y_train: array size nb_timesteps * nb_tasks
+        :param x_test: array size nb_timesteps_test * 1, represents time
+        :return: a plot of the losses, the covariance matrices and the regression for each block
+        '''
 
         test_mean_list, test_covar_matrix_list, test_std_deviation = self.test_block_model(x_test)
 
@@ -115,9 +141,17 @@ class MGP():
 
 
         for j in range(self.number_of_block):
-            ax1 = fig.add_subplot(gs[1, 2*j])
-            ax1.imshow(test_covar_matrix_list[j])
-            ax1.set_title('Block %d Covar Matrix' % j)
+            nb_tasks = len(self.block_indices[j])
+
+            if nb_tasks ==1: #single GP
+                ax1 = fig.add_subplot(gs[1, 2*j])
+                ax1.imshow(test_covar_matrix_list[j])
+                ax1.set_title('Block %d Covar Matrix' % j)
+            if nb_tasks > 1 :  # multi GP
+                ax1 = fig.add_subplot(gs[1, 2*j])
+                matrix = data_processing.change_representation_covariance_matrix(test_covar_matrix_list[j], nb_tasks)
+                ax1.imshow(matrix)
+                ax1.set_title('Block %d Covar Matrix' % j)
 
             ax2 = fig.add_subplot(gs[1, 2*j+1])
             ax2.plot(self.loss_list[j])
