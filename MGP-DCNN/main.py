@@ -18,7 +18,7 @@ nb_individuals_test = 1
 
 nb_samples_per_id = 10
 nb_time_steps = 105
-nb_selected_points = 35
+nb_selected_points = 15
 nb_peaks_selected = 2
 nb_input_tasks = 5
 nb_output_tasks = 5
@@ -28,8 +28,14 @@ nb_blocks = len(block_indices)
 
 data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub_1_T_150_freq_1'
 
+
+
 with h5py.File(data_file, 'r') as data:
-    y_data = data['x_data'][:,:105]
+    y_data = data['x_data'][:]
+
+y_data = data_processing.align_data_on_peak(y_data)
+
+
 
 x_train  = np.arange(70)/105
 x_test = np.arange(105)/105
@@ -50,8 +56,8 @@ data_augmentation_with_multiple_posteriors = False
 
 h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
                                                        kernel=time_kernel, learning_rate=learning_rate, n_iter=n_iter,
-                                                       nb_selected_points = nb_selected_points, nb_peaks_selected = nb_peaks_selected,
-                                                       save_h5 = True, activate_plot=False)
+                                                       nb_selected_points = 15, nb_peaks_selected = nb_peaks_selected,
+                                                       save_h5 = True, activate_plot=True)
 
 
 
@@ -59,7 +65,7 @@ gp_output_file = 'output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%
                      # % (nb_individuals, nb_time_steps,  nb_selected_points, nb_blocks, nb_peaks_selected), 'r') as data:
 
 
-gp_output_file = 'output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'%(4, 105, 35, 2, 2)
+gp_output_file = 'output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'%(4, 105, 15, 2, 2)
 
 # FIXME : differnet number of tasks input/output
 # FIXME  : ALIGN ON PEAKS
@@ -121,15 +127,15 @@ default_parameters = [2e-3, 4, 7, 4e-7, 2, 4]
 network.optimization_process(parameters_range, default_parameters=default_parameters, nb_calls = 4, nb_random_starts = 1, plot_conv=True)
 
 
-
-
-mean_popu, covar_popu = mgp.training_testing_mutliple_MGPs(train_x, train_y, test_x, plot=True)
-
-h5_name = save_mean_covar_as_h5_file(mean_popu, covar_popu)
-out = generate_posterior_samples(h5_name, 15)
-print(h5_name)
-
-plt.plot(out[0,2,:,0])
-plt.plot(out[0,8,:,0])
-plt.plot(out[0,6,:,0])
-plt.show()
+#
+#
+# mean_popu, covar_popu = mgp.training_testing_mutliple_MGPs(train_x, train_y, test_x, plot=True)
+#
+# h5_name = save_mean_covar_as_h5_file(mean_popu, covar_popu)
+# out = generate_posterior_samples(h5_name, 15)
+# print(h5_name)
+#
+# plt.plot(out[0,2,:,0])
+# plt.plot(out[0,8,:,0])
+# plt.plot(out[0,6,:,0])
+# plt.show()

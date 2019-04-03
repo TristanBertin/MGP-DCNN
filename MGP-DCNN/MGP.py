@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import data_processing
+from scipy.signal import find_peaks
 import h5py
 
 
@@ -109,7 +110,7 @@ class Block_MGP():
         return test_mean_list, test_covar_matrix_list, test_std
 
 
-    def plot_model(self, x_train, y_train, x_test):
+    def plot_model(self, x_train, y_train, x_test, train_filter):
         '''
         :param x_train: array size nb_timesteps * 1, represents time
         :param y_train: array size nb_timesteps * nb_tasks
@@ -131,7 +132,7 @@ class Block_MGP():
                 ax.fill_between(x_test, test_mean_list[j] + test_std_deviation[j],
                                 test_mean_list[j] - test_std_deviation[j], alpha=0.3)
                 ax.set_title('Block %d Level %d' % (j, self.block_indices[j][0]))
-                ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j]], 'k*',color='tomato')
+                ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j]],color='tomato')
                 iter = iter + 1
                 ax.axvline(x_train.shape[0]/x_test.shape[0], color='green')
 
@@ -141,7 +142,8 @@ class Block_MGP():
                     ax.plot(x_test.detach().numpy(), test_mean_list[j][:,i])
                     ax.fill_between(x_test, test_mean_list[j][:,i] + test_std_deviation[j][:,i], test_mean_list[j][:,i] - test_std_deviation[j][:,i], alpha=0.3)
                     ax.set_title('Block %d Level %d'%(j,self.block_indices[j][i]))
-                    ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j][i]], 'k*', color='tomato')
+                    ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j][i]], color='tomato')
+                    ax.plot(x_train.detach().numpy()[train_filter], y_train.detach().numpy()[train_filter, self.block_indices[j][i]], 'k*', color='red')
                     ax.axvline(x_train.shape[0]/x_test.shape[0], color='green')
                     iter=iter+1
 
@@ -168,8 +170,9 @@ class Block_MGP():
 
 
 
-def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test=None,
-                                         kernel, learning_rate, n_iter, nb_selected_points, nb_peaks_selected,
+def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test,
+                                         kernel, learning_rate, n_iter,
+                                         nb_selected_points = None, nb_peaks_selected = None, id_curve_peaks = 0,
                                          save_h5 = False, activate_plot=False):
     '''
     :param x_train: array size nb_timesteps_test * 1, represents time
@@ -182,6 +185,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
 
     BE CAREFUL : x_train and x_test must be the same for all the individuals...
     '''
+
 
     if len(x_train.shape)>1:
         raise ValueError('Wrong dimensions for the input X_train, x_train should be a 1D Vector')
@@ -202,19 +206,60 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
         list_covariance_matrix = []
 
     for i in range(nb_individuals):
+
+        if nb_selected_points != None: # WE SELECT A SUBSET OF POINTS
+
+            if nb_peaks_selected != None:  # we select the peaks of the id_curve_peaks th curve
+
+                nb_cache = nb_selected_points - nb_peaks_selected
+                # idx_peaks = np.argsort(y_train[i, :40, id_curve_peaks])[-nb_peaks_selected:]
+
+                ### scipy.find_peaks doesn' t detect the peak when it is the first element,
+                # to avoid this problem, we add a single value at the begining...
+                curve_peaks = np.concatenate((np.array([-10]), y_train[i, :40, id_curve_peaks]))
+                idx_peaks,_ = find_peaks(curve_peaks, distance = 20)
+
+                idx_peaks = idx_peaks - 1
+                print('LENGTH between selectec peaks):', idx_peaks[1]-idx_peaks[0])
+
+                cache = np.random.permutation(np.delete(np.arange(x_train.shape[0]), idx_peaks[:nb_peaks_selected]))
+                filter = np.sort(np.concatenate([cache[:nb_cache], idx_peaks]))
+
+            if nb_peaks_selected == None:  # random selection over the training input timesteps
+                nb_cache = nb_selected_points
+                cache = np.random.permutation(np.arange(x_train.shape[0]))
+                filter = np.sort(cache[:nb_cache])
+
+            x_train_cur = x_train[filter]
+            y_train_cur = y_train[i, filter]
+
+        if nb_selected_points == None: # WE SELECT ALL THE POINTS
+
+            x_train_cur = x_train
+            y_train_cur = y_train[i]
+            filter = np.arange(x_train.shape[0])
+
+
         print('###########      INDIVIDUAL %d    ###########'%i)
         mgp = Block_MGP(kernel, learning_rate, n_iter, block_indices)
-        mgp.build_and_train_block_models(x_train, y_train[i])
+        mgp.build_and_train_block_models(x_train_cur, y_train_cur)
 
         if activate_plot:
-            mgp.plot_model(x_train, y_train[i], x_test)
+            mgp.plot_model(x_train, y_train[i], x_test, train_filter = filter)
 
         if save_h5:
             test_mean_list, test_covar_matrix_list, _ = mgp.test_block_model(x_test)
             list_means.append(test_mean_list)
             list_covariance_matrix.append(test_covar_matrix_list)
 
+
     if save_h5:
+
+        if nb_selected_points == None:
+            nb_peaks_selected = x_train.shape[0]
+        if nb_peaks_selected == None:
+            nb_peaks_selected = 0
+
         h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'
                                   %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
 

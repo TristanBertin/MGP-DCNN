@@ -202,6 +202,7 @@ class Time_Neural_Network():
                     (self.model_type, score * 1000, self.nb_selected_points, self.nb_time_steps,
                      self.nb_peaks_selected))
         plt.close(fig)
+        plt.close()
 
         fig, axes = plt.subplots(ncols=5, nrows=5, figsize=(20, 10))
         for j in range(5):
@@ -216,6 +217,7 @@ class Time_Neural_Network():
         plt.savefig('plots/%s_LOSS_%d_TRAIN_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d' %
                     (self.model_type, score * 1000, self.nb_selected_points, self.nb_time_steps,
                      self.nb_peaks_selected))
+        plt.close()
 
 
 

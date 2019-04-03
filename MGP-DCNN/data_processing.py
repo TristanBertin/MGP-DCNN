@@ -1,20 +1,38 @@
 import h5py
 import numpy as np
+import matplotlib.pyplot as plt
 
-def save_mean_covar_as_h5_file(mean_array, covar_matrix_array):
+
+
+
+def align_data_on_peak(data, column=0, plot=False):
     '''
-    :param mean_array: mean of the GP posterior
-    :param covar_matrix_array: covariance matrux of the GP
-    :return: the name of the file.h5 that contains those two saved arrays
+    :param data: a numpy array of size [number_id, number time_step, nb_hormones]
+    :param column ; the column on which the peaks have to be aligned (we look at the peak in the 37 first days)
+    :return: an array with the same axis but the time series are aligned with the peak of the first hormonal level
+
+    BE CAREFUL : SHAPE OF THE ARRAY HAS CHANGED ! WE SELCT ONLY 140 points once the data have been aligned ! (still a cube of data)
     '''
 
-    (nb_individuals, nb_time_steps, nb_tasks) = mean_array.shape
-    h5_dataset = h5py.File('output_MGP/Output_MGP_%dIndividuals_%dTime_%dTasks' % (nb_individuals, nb_time_steps, nb_tasks), 'w')
-    h5_dataset.create_dataset('mean_array', data=mean_array)
-    h5_dataset.create_dataset('covar_matrix_array', data=covar_matrix_array)
-    h5_dataset.close()
-    print('\n H5 SAVED')
-    return str('Output_MGP_%dIndividuals_%dTime_%dTasks' % (nb_individuals, nb_time_steps, nb_tasks))
+    output = []
+    for i in range(data.shape[0]):
+        index = np.argmax(data[i,:37,column])
+        # print(data[i, index:, :].shape)
+        output.append(data[None,i, index:index+105, :])
+
+    output = np.vstack(output)
+    print(output.shape)
+
+    if plot:
+        plt.plot(output[4][:, 0])
+        plt.plot(output[8][:, 0])
+        plt.plot(output[32][:, 0])
+        plt.plot(output[48][:, 0])
+        plt.show()
+
+    return output
+
+
 
 
 def generate_samples_single_id(gp_mean, gp_covar_matrix, num_samples):
@@ -191,9 +209,6 @@ def import_and_split_data_train_val_test(output_gp_path, y_true, block_indices, 
         shuffle_index_train = np.random.permutation(np.arange(nb_individuals_train * nb_samples_per_id))
         x_train = x_train[shuffle_index_train]
         y_train = np.tile(y_true[None, index_individuals_train], (nb_samples_per_id, 1, 1, 1))
-
-        print('dfssdfsdf', np.swapaxes(y_train, 0, 1).shape)
-        print('enculeeee', nb_timesteps, nb_tasks)
 
         y_train = np.swapaxes(y_train, 0, 1).reshape(-1, nb_timesteps, nb_tasks)
         y_train = y_train[shuffle_index_train]

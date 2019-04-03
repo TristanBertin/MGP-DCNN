@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5aac54-13c4-4540-b093-e9f9c6ee6d97" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MGP-DCNN/MGP.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGP-DCNN/MGP.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MGP-DCNN/TNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGP-DCNN/TNN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MGP-DCNN/data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGP-DCNN/data_processing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MGP-DCNN/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGP-DCNN/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGP-DCNN/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGP-DCNN/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGP-DCNN/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+            <state relative-caret-position="197">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
               <folding>
                 <element signature="e#1#13#0" expanded="true" />
               </folding>
@@ -30,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGP-DCNN/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
+            <state relative-caret-position="-238">
+              <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -39,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGP-DCNN/TNN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="205" column="44" selection-start-line="205" selection-start-column="44" selection-end-line="205" selection-end-column="44" />
+            <state relative-caret-position="372">
+              <caret line="119" selection-start-line="119" selection-end-line="119" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -51,23 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGP-DCNN/TNN_subclasses.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-              <folding>
-                <element signature="e#0#169#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="155" column="41" lean-forward="true" selection-start-line="155" selection-start-column="41" selection-end-line="155" selection-end-column="41" />
+            <state relative-caret-position="446">
+              <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
               <folding>
                 <element signature="e#1#68#0" expanded="true" />
               </folding>
@@ -76,10 +66,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGP-DCNN/TNN_subclasses.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#169#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGP-DCNN/utils.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP_subclasses.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -100,6 +107,7 @@
     <findStrings>
       <find>t1</find>
       <find>x_data</find>
+      <find>save_mean_covar_as_h5_file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -115,10 +123,11 @@
         <option value="$PROJECT_DIR$/MGP-DCNN/MGP_methods.py" />
         <option value="$PROJECT_DIR$/MGP-DCNN/DCNN.py" />
         <option value="$PROJECT_DIR$/MGP-DCNN/TNN_subclasses.py" />
-        <option value="$PROJECT_DIR$/MGP-DCNN/main.py" />
-        <option value="$PROJECT_DIR$/MGP-DCNN/data_processing.py" />
-        <option value="$PROJECT_DIR$/MGP-DCNN/MGP.py" />
         <option value="$PROJECT_DIR$/MGP-DCNN/TNN.py" />
+        <option value="$PROJECT_DIR$/MGP-DCNN/utils.py" />
+        <option value="$PROJECT_DIR$/MGP-DCNN/data_processing.py" />
+        <option value="$PROJECT_DIR$/MGP-DCNN/main.py" />
+        <option value="$PROJECT_DIR$/MGP-DCNN/MGP.py" />
       </list>
     </option>
   </component>
@@ -255,8 +264,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.TNN" />
         <item itemvalue="Python.MGP" />
+        <item itemvalue="Python.TNN" />
         <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
@@ -279,7 +288,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18124342" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18124342" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -287,7 +296,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.32981783" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.32981783" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39980826" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -335,48 +344,14 @@
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/DCNN.py" />
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/DCNN_methods.py" />
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/TNN_subclasses.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="170">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding>
             <element signature="e#0#169#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/data_processing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding>
-            <element signature="e#1#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="155" column="41" lean-forward="true" selection-start-line="155" selection-start-column="41" selection-end-line="155" selection-end-column="41" />
-          <folding>
-            <element signature="e#1#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -384,7 +359,7 @@
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP_subclasses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
           </folding>
@@ -393,10 +368,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/TNN.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="205" column="44" selection-start-line="205" selection-start-column="44" selection-end-line="205" selection-end-column="44" />
+        <state relative-caret-position="372">
+          <caret line="119" selection-start-line="119" selection-end-line="119" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGP-DCNN/data_processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGP-DCNN/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#1#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
+          <folding>
+            <element signature="e#1#68#0" expanded="true" />
           </folding>
         </state>
       </provider>
