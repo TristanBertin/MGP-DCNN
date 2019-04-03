@@ -33,21 +33,24 @@ def RNN_time_prediction(nb_time_steps, nb_tasks_input, nb_tasks_output, regulari
     return model
 
 
-def CNN_time_prediction(xy_length, nb_sensors, number_of_layers, learning_rate, kernel_size, number_of_filters, regularizer_coef):
+
+def CNN_time_prediction(xy_length, nb_tasks_input, nb_tasks_output, nb_hidden_layers, learning_rate, number_of_filters, kernel_size, regularizer_coef, dilation_factor):
 
     regularizer = l2(regularizer_coef)
+    kernel_size = (kernel_size,)
+    dilation_factor = (dilation_factor, )
 
-    input = Input(shape=(xy_length, nb_sensors))
+    input = Input(shape=(xy_length, nb_tasks_input))
 
-    for i in range(number_of_layers-1):
+    for i in range(nb_hidden_layers + 1):
         if i ==0 :
             x = Conv1D(number_of_filters, kernel_size, padding='same', name='conv_%d' % i, strides=1,
                        activation='relu', kernel_regularizer=regularizer, dilation_rate=1)(input)
         else:
-            y = Conv1D(number_of_filters, kernel_size, padding='same',name='conv_%d'%i, strides =1, activation= 'relu', kernel_regularizer=regularizer, dilation_rate=2)(x)
+            y = Conv1D(number_of_filters, kernel_size, padding='same',name='conv_%d'%i, strides =1, activation= 'relu', kernel_regularizer=regularizer, dilation_rate=dilation_factor)(x)
             x = Add()([x,y])
 
-    x = Conv1D(nb_sensors, kernel_size, padding='same', strides=1, kernel_regularizer=regularizer, dilation_rate=1)(x)
+    x = Conv1D(nb_tasks_output, kernel_size, padding='same', strides=1, kernel_regularizer=regularizer, dilation_rate=1)(x)
 
     model = Model(input, x, name='time_cnn')
 

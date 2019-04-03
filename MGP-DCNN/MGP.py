@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import data_processing
+import h5py
 
 
 class Block_MGP():
@@ -33,6 +34,7 @@ class Block_MGP():
         :return: modifies the attributes model and likelihood according to the training data
         '''
 
+
         nb_tasks = y_train.shape[-1]
         if nb_tasks == 1:
             self.likelihood.append(gpytorch.likelihoods.GaussianLikelihood())
@@ -49,13 +51,15 @@ class Block_MGP():
         mll = gpytorch.mlls.ExactMarginalLogLikelihood(self.likelihood[block_number], self.model[block_number])
         loss_list_cur = []
 
+        plot_frequency = self.n_training_iter // 5
+
         for i in range(self.n_training_iter):
             optimizer.zero_grad()
             output = self.model[block_number](x_train)
             loss = -mll(output, y_train)
             loss.backward()
             optimizer.step()
-            if i % 30 == 0:
+            if i % plot_frequency == 0:
                 print('Iter %d/%d - Loss: %.3f' % (i + 1, self.n_training_iter, loss.item()))
             loss_list_cur.append(loss.item())
         self.loss_list.append(loss_list_cur)
@@ -129,6 +133,7 @@ class Block_MGP():
                 ax.set_title('Block %d Level %d' % (j, self.block_indices[j][0]))
                 ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j]], 'k*',color='tomato')
                 iter = iter + 1
+                ax.axvline(x_train.shape[0]/x_test.shape[0], color='green')
 
             else: #MGP
                 for i in range(len(self.block_indices[j])):
@@ -137,6 +142,7 @@ class Block_MGP():
                     ax.fill_between(x_test, test_mean_list[j][:,i] + test_std_deviation[j][:,i], test_mean_list[j][:,i] - test_std_deviation[j][:,i], alpha=0.3)
                     ax.set_title('Block %d Level %d'%(j,self.block_indices[j][i]))
                     ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j][i]], 'k*', color='tomato')
+                    ax.axvline(x_train.shape[0]/x_test.shape[0], color='green')
                     iter=iter+1
 
 
@@ -158,6 +164,73 @@ class Block_MGP():
             ax2.set_title('Block %d Loss' % j)
 
         plt.show()
+
+
+
+
+def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test=None,
+                                         kernel, learning_rate, n_iter, nb_selected_points, nb_peaks_selected,
+                                         save_h5 = False, activate_plot=False):
+    '''
+    :param x_train: array size nb_timesteps_test * 1, represents time
+    :param y_train: array size nb_individuals * nb_timesteps_test * number_tasks, represents time
+    :param block_indices: list of lists of indices (ex: [[0,1],[2,3],[4]]
+    :param x_test: array size nb_timesteps_test * 1, represents time
+    :param save_h5: boolean, to save the test values in a h5 file or not
+    :param activate_plot: to plot for each individual the resulted regressions, losses...
+    :return: train Block MGP for multiple individuals
+
+    BE CAREFUL : x_train and x_test must be the same for all the individuals...
+    '''
+
+    if len(x_train.shape)>1:
+        raise ValueError('Wrong dimensions for the input X_train, x_train should be a 1D Vector')
+    if len(x_test.shape)>1:
+        raise ValueError('Wrong dimensions for the input X_test, x_test should be a 1D Vector')
+    if x_train.shape[0] != y_train.shape[1]:
+        raise ValueError('Number of time steps is different for x_train and y_train')
+
+
+    flat_indices = [item for sublist in block_indices for item in sublist]
+    nb_individuals, _, nb_tasks = y_train.shape
+
+    if max(flat_indices) > nb_tasks:
+        raise ValueError('One of the block indices is higher than the number of tasks in Y_train')
+
+    if save_h5 == True:
+        list_means = []
+        list_covariance_matrix = []
+
+    for i in range(nb_individuals):
+        print('###########      INDIVIDUAL %d    ###########'%i)
+        mgp = Block_MGP(kernel, learning_rate, n_iter, block_indices)
+        mgp.build_and_train_block_models(x_train, y_train[i])
+
+        if activate_plot:
+            mgp.plot_model(x_train, y_train[i], x_test)
+
+        if save_h5:
+            test_mean_list, test_covar_matrix_list, _ = mgp.test_block_model(x_test)
+            list_means.append(test_mean_list)
+            list_covariance_matrix.append(test_covar_matrix_list)
+
+    if save_h5:
+        h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'
+                                  %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
+
+        h5_dataset = h5py.File(h5_dataset_path, 'w')
+
+        for i in range(len(block_indices)):
+            cur_mean = np.array([list_means[j][i] for j in range(y_train.shape[0])])
+            cur_covariance = np.array([list_covariance_matrix[j][i] for j in range(y_train.shape[0])])
+
+            h5_dataset.create_dataset('mean_block_%d'%i, data=cur_mean)
+            h5_dataset.create_dataset('covar_block_%d'%i, data=cur_covariance)
+        h5_dataset.close()
+
+        return h5_dataset_path
+
+
 
 
 
