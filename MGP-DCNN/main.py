@@ -44,7 +44,7 @@ block_indices = [[0,1],[2,3,4]]
 nb_blocks = len(block_indices)
 
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.33,0.1))
-n_iter = 400
+n_iter = 500
 learning_rate = 0.02
 data_augmentation_with_multiple_posteriors = False
 new_h5 = True
@@ -68,7 +68,7 @@ if new_h5 == True:
     h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
                                                        kernel=time_kernel, learning_rate=learning_rate, n_iter=n_iter,
                                                        nb_selected_points = nb_selected_points, nb_peaks_selected = nb_peaks_selected,
-                                                       save_h5 = True, activate_plot=True, smart_end = True)
+                                                       save_h5 = True, activate_plot=False, smart_end = True)
     print(h5_dataset_path)
 
 else :
