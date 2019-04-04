@@ -4,3 +4,4 @@
 *.jpg
 
 *.h5
+output_models/*
