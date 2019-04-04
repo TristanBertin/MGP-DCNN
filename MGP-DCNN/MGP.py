@@ -27,7 +27,7 @@ class Block_MGP():
         self.loss_list = []
 
 
-    def build_and_train_single_model(self, x_train, y_train, block_number=0):
+    def build_and_train_single_model(self, x_train, y_train, block_number=0, smart_end = False):
         '''
         :param x_train: array size nb_timesteps *1, represents time
         :param y_train: array size nb_timesteps * nb_tasks
@@ -54,19 +54,38 @@ class Block_MGP():
 
         plot_frequency = self.n_training_iter // 5
 
+        if smart_end:
+            loss_hist = 0
+
         for i in range(self.n_training_iter):
             optimizer.zero_grad()
             output = self.model[block_number](x_train)
             loss = -mll(output, y_train)
-            loss.backward()
-            optimizer.step()
-            if i % plot_frequency == 0:
-                print('Iter %d/%d - Loss: %.3f' % (i + 1, self.n_training_iter, loss.item()))
-            loss_list_cur.append(loss.item())
+
+            if i>30 and smart_end:
+                min_loss_variation = np.min(np.array(loss_list_cur[1:30])-np.array(loss_list_cur[0:29]))
+                if loss - loss_hist > - 4 * min_loss_variation :
+                    break
+                else:
+                    loss.backward()
+                    optimizer.step()
+                    if i % plot_frequency == 0:
+                        print('Iter %d/%d - Loss: %.3f' % (i + 1, self.n_training_iter, loss.item()))
+                    loss_list_cur.append(loss.item())
+
+            else:
+                loss.backward()
+                optimizer.step()
+                if i % plot_frequency == 0:
+                    print('Iter %d/%d - Loss: %.3f' % (i + 1, self.n_training_iter, loss.item()))
+                loss_list_cur.append(loss.item())
+
+            loss_hist = loss.item()
+
         self.loss_list.append(loss_list_cur)
 
 
-    def build_and_train_block_models(self, x_train, y_train):
+    def build_and_train_block_models(self, x_train, y_train, smart_end = False):
         '''
         :param x_train: array size nb_timesteps *1, represents time
         :param y_train: array size nb_timesteps * nb_tasks
@@ -74,7 +93,7 @@ class Block_MGP():
         '''
         for i in range(self.number_of_block):
             print('### BLOCK %d ###'%i)
-            self.build_and_train_single_model(x_train, y_train[:,self.block_indices[i]], i)
+            self.build_and_train_single_model(x_train, y_train[:,self.block_indices[i]], i, smart_end)
 
 
     def test_block_model(self, x_test):
@@ -115,12 +134,13 @@ class Block_MGP():
         :param x_train: array size nb_timesteps * 1, represents time
         :param y_train: array size nb_timesteps * nb_tasks
         :param x_test: array size nb_timesteps_test * 1, represents time
+        :param train_filter : indices of the selected points for the training
         :return: a plot of the losses, the covariance matrices and the regression for each block
         '''
 
         test_mean_list, test_covar_matrix_list, test_std_deviation = self.test_block_model(x_test)
 
-        fig = plt.figure()
+        fig = plt.figure(figsize=(18.5,9))
         gs = GridSpec(2, max(self.total_nb_tasks, 2*self.number_of_block))
         iter = 0
 
@@ -133,6 +153,7 @@ class Block_MGP():
                                 test_mean_list[j] - test_std_deviation[j], alpha=0.3)
                 ax.set_title('Block %d Level %d' % (j, self.block_indices[j][0]))
                 ax.plot(x_train.detach().numpy(), y_train.detach().numpy()[:, self.block_indices[j]],color='tomato')
+                ax.plot(x_train.detach().numpy()[train_filter],y_train.detach().numpy()[train_filter, self.block_indices[j][0]], 'k*', color='red')
                 iter = iter + 1
                 ax.axvline(x_train.shape[0]/x_test.shape[0], color='green')
 
@@ -173,7 +194,7 @@ class Block_MGP():
 def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test,
                                          kernel, learning_rate, n_iter,
                                          nb_selected_points = None, nb_peaks_selected = None, id_curve_peaks = 0,
-                                         save_h5 = False, activate_plot=False):
+                                         save_h5 = False, activate_plot=False, smart_end = False):
     '''
     :param x_train: array size nb_timesteps_test * 1, represents time
     :param y_train: array size nb_individuals * nb_timesteps_test * number_tasks, represents time
@@ -185,6 +206,15 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
 
     BE CAREFUL : x_train and x_test must be the same for all the individuals...
     '''
+
+    flat_block_indices = [item for sublist in block_indices for item in sublist]
+
+    a = []
+    for i in range(len(block_indices)):
+        a.append([])
+        for j in range(len(block_indices[i])):
+            a[i].append(flat_block_indices.index(block_indices[i][j]))
+    block_indices = a
 
 
     if len(x_train.shape)>1:
@@ -220,7 +250,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
                 idx_peaks,_ = find_peaks(curve_peaks, distance = 20)
 
                 idx_peaks = idx_peaks - 1
-                print('LENGTH between selectec peaks):', idx_peaks[1]-idx_peaks[0])
+                print('LENGTH between selectec peaks :', idx_peaks[1]-idx_peaks[0])
 
                 cache = np.random.permutation(np.delete(np.arange(x_train.shape[0]), idx_peaks[:nb_peaks_selected]))
                 filter = np.sort(np.concatenate([cache[:nb_cache], idx_peaks]))
@@ -242,7 +272,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
 
         print('###########      INDIVIDUAL %d    ###########'%i)
         mgp = Block_MGP(kernel, learning_rate, n_iter, block_indices)
-        mgp.build_and_train_block_models(x_train_cur, y_train_cur)
+        mgp.build_and_train_block_models(x_train_cur, y_train_cur, smart_end)
 
         if activate_plot:
             mgp.plot_model(x_train, y_train[i], x_test, train_filter = filter)
@@ -260,7 +290,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
         if nb_peaks_selected == None:
             nb_peaks_selected = 0
 
-        h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'
+        h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
                                   %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
 
         h5_dataset = h5py.File(h5_dataset_path, 'w')

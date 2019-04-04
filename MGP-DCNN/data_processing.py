@@ -1,11 +1,11 @@
 import h5py
 import numpy as np
+import torch
 import matplotlib.pyplot as plt
 
 
 
-
-def align_data_on_peak(data, column=0, plot=False):
+def align_data_on_peak(data, length, column=0, plot=False):
     '''
     :param data: a numpy array of size [number_id, number time_step, nb_hormones]
     :param column ; the column on which the peaks have to be aligned (we look at the peak in the 37 first days)
@@ -18,7 +18,7 @@ def align_data_on_peak(data, column=0, plot=False):
     for i in range(data.shape[0]):
         index = np.argmax(data[i,:37,column])
         # print(data[i, index:, :].shape)
-        output.append(data[None,i, index:index+105, :])
+        output.append(data[None,i, index:index+length, :])
 
     output = np.vstack(output)
     print(output.shape)
@@ -31,6 +31,34 @@ def align_data_on_peak(data, column=0, plot=False):
         plt.show()
 
     return output
+
+
+def prepare_data_before_GP(y_data, block_indices, nb_time_steps, nb_train_time_steps, nb_train_individuals, scaler=None):
+
+    block_indices_flat = np.array([item for sublist in block_indices for item in sublist])
+    y_data = y_data[:, :, block_indices_flat]
+    nb_gp_tasks = len(block_indices_flat)
+    print('RRRRRR', y_data.shape)
+
+    if scaler != None:
+        '''  Scale the data  '''
+        y_train_data = y_data[:nb_train_individuals]
+
+        shape_before_scaling = y_data.shape
+        y_train_data = scaler.fit_transform(y_train_data.reshape(-1, nb_gp_tasks))
+        y_data = scaler.transform(y_data.reshape(-1, nb_gp_tasks)).reshape(shape_before_scaling)
+
+    x_train = np.arange(nb_train_time_steps) / nb_time_steps
+    x_test = np.arange(nb_time_steps) / nb_time_steps
+    y_train = y_data[:, :nb_train_time_steps]
+    y_test = y_data[:, :nb_time_steps]
+
+    train_x = torch.tensor(x_train).float()
+    train_y = torch.tensor(y_train).float()
+    test_x = torch.tensor(x_test).float()
+    test_y = torch.tensor(y_test).float()
+
+    return train_x, train_y, test_x, test_y, scaler
 
 
 

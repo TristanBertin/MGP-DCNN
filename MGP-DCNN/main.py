@@ -11,14 +11,31 @@ import math
 import h5py
 from TNN import Time_Neural_Network
 
-nb_individuals = 4
-nb_individuals_train = 2
+
+
+
+
+
+###################################    IMPORT DATA    #####################################
+
+data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub_1_T_150_freq_1'
+
+with h5py.File(data_file, 'r') as data:
+    y_data = data['x_data'][:]
+
+y_data_shape = y_data.shape
+
+
+nb_individuals = 60
+nb_individuals_train = 3
 nb_individuals_val = 1
 nb_individuals_test = 1
 
-nb_samples_per_id = 10
 nb_time_steps = 105
-nb_selected_points = 15
+nb_train_time_steps = 70
+
+nb_samples_per_id = 10
+nb_selected_points = 70
 nb_peaks_selected = 2
 nb_input_tasks = 5
 nb_output_tasks = 5
@@ -26,54 +43,50 @@ nb_output_tasks = 5
 block_indices = [[0,1],[2,3,4]]
 nb_blocks = len(block_indices)
 
-data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub_1_T_150_freq_1'
-
-
-
-with h5py.File(data_file, 'r') as data:
-    y_data = data['x_data'][:]
-
-y_data = data_processing.align_data_on_peak(y_data)
-
-
-
-x_train  = np.arange(70)/105
-x_test = np.arange(105)/105
-y_train = y_data[:4,:70]
-y_test = y_data[:4,:105]
-
-train_x = torch.tensor(x_train).float()
-train_y = torch.tensor(y_train).float()
-test_x = torch.tensor(x_test).float()
-test_y = torch.tensor(y_test).float()
-
-
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.33,0.1))
-n_iter = 10
-learning_rate = 0.1
+n_iter = 400
+learning_rate = 0.02
 data_augmentation_with_multiple_posteriors = False
+new_h5 = True
 
 
-h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
+###############            WE SCALE THE DATA BASED ON THE TRAINING SET      ##################
+
+y_data = data_processing.align_data_on_peak(y_data, length=nb_time_steps, column=0)
+
+scaler = MinMaxScaler()
+
+train_x, train_y, test_x, test_y, scaler = data_processing.prepare_data_before_GP(y_data,
+                                                                  block_indices = block_indices,
+                                                                  nb_time_steps = nb_time_steps,
+                                                                  nb_train_time_steps = nb_train_time_steps,
+                                                                  nb_train_individuals = nb_individuals_train,
+                                                                  scaler=scaler)
+
+
+if new_h5 == True:
+    h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
                                                        kernel=time_kernel, learning_rate=learning_rate, n_iter=n_iter,
-                                                       nb_selected_points = 15, nb_peaks_selected = nb_peaks_selected,
-                                                       save_h5 = True, activate_plot=True)
+                                                       nb_selected_points = nb_selected_points, nb_peaks_selected = nb_peaks_selected,
+                                                       save_h5 = True, activate_plot=True, smart_end = True)
+    print(h5_dataset_path)
+
+else :
+    h5_dataset_path = 'output_models/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'\
+                      %(nb_individuals, nb_time_steps, nb_selected_points, nb_blocks, nb_peaks_selected)
 
 
 
-gp_output_file = 'output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'%(2, 8, 35, 2, 2)
-                     # % (nb_individuals, nb_time_steps,  nb_selected_points, nb_blocks, nb_peaks_selected), 'r') as data:
-
-
-gp_output_file = 'output_models/OUTPUT_MGP_Nb_women_%d_Time_%d_selected_points_%d_Nb_blocks_%d_nb_peaks_%d'%(4, 105, 15, 2, 2)
 
 # FIXME : differnet number of tasks input/output
-# FIXME  : ALIGN ON PEAKS
+
 
 print(nb_time_steps, nb_input_tasks)
 
+y_data = scaler.transform(y_data.reshape(-1,5)).reshape(-1,105,5)
+
 x_train, y_train, x_val, y_val, x_test, y_test = \
-    data_processing.import_and_split_data_train_val_test( output_gp_path = gp_output_file,
+    data_processing.import_and_split_data_train_val_test( output_gp_path = h5_dataset_path,
                                                           y_true = y_data,
                                                           block_indices= block_indices,
                                                           nb_timesteps = nb_time_steps,
@@ -85,24 +98,13 @@ x_train, y_train, x_val, y_val, x_test, y_test = \
                                                           data_augmentation_with_multiple_posteriors=True,
                                                           nb_samples_per_id=10)
 
-print(x_train.shape)
-print(y_train.shape)
-print(x_test.shape)
-print(y_test.shape)
 
-plt.plot(x_test[0,:,3])
-plt.plot(x_test[1,:,3])
-plt.plot(x_test[9,:,3])
-plt.plot(x_test[8,:,3])
+plt.plot(x_train[0,:,0])
+plt.plot(x_train[0,:,1])
+plt.plot(x_train[0,:,2])
+plt.plot(y_train[0,:,0])
+plt.plot(y_train[0,:,0])
 plt.show()
-
-
-# '''  Scale the data  '''
-# scaler = StandardScaler()
-# shape1, shape2 = y_data.shape, y_gp_posterior_samples.shape
-#
-# y_data = scaler.fit_transform(y_data.reshape(-1,5)).reshape(shape1)
-# y_gp_posterior_samples = scaler.transform(y_gp_posterior_samples.reshape(-1, 5)).reshape(shape2)
 
 
 dim_learning_rate = Real(low=2e-3, high=1.2e-2, prior='log-uniform', name='learning_rate')
@@ -115,7 +117,7 @@ dim_dilation_factor = Integer(low=2, high=4, name='kernel_size')
 
 parameters_range = [dim_learning_rate,dim_nb_hidden_layers,dim_nb_filters,dim_regularizer_coef, dim_kernel_size, dim_dilation_factor]
 
-network = Time_Neural_Network('CNN', nb_selected_points=35, nb_peaks_selected=0, batch_size=10, nb_epochs=50,
+network = Time_Neural_Network('CNN', nb_selected_points=nb_selected_points, nb_peaks_selected=0, batch_size=10, nb_epochs=50,
                         x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, x_val=x_val, y_val=y_val)
 
 network.build_TNN(learning_rate=0.1, nb_hidden_layers=2, nb_filters=4,regularizer_coef=1e-7, kernel_size=6, dilation_factor=1, display_summary=True)
