@@ -1,13 +1,15 @@
 
 from .MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
+from .data_processing import change_representation_covariance_matrix
+
 import torch
 import gpytorch
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
-from .data_processing import change_representation_covariance_matrix
 from scipy.signal import find_peaks
 import h5py
+import os
 
 
 class Block_MGP():
@@ -194,7 +196,7 @@ class Block_MGP():
 def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test,
                                          kernel, learning_rate, n_iter,
                                          nb_selected_points = None, nb_peaks_selected = None,
-                                         save_h5 = False, activate_plot=False, smart_end = False):
+                                         activate_plot=False, smart_end = False):
     '''
     :param x_train: array size nb_timesteps_test * 1, represents time
     :param y_train: array size nb_individuals * nb_timesteps_test * number_tasks, represents time
@@ -231,9 +233,8 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
     if max(flat_indices) > nb_tasks:
         raise ValueError('One of the block indices is higher than the number of tasks in Y_train')
 
-    if save_h5 == True:
-        list_means = []
-        list_covariance_matrix = []
+    list_means = []
+    list_covariance_matrix = []
 
     for i in range(nb_individuals):
 
@@ -277,33 +278,34 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
         if activate_plot:
             mgp.plot_model(x_train, y_train[i], x_test, train_filter = filter)
 
-        if save_h5:
-            test_mean_list, test_covar_matrix_list, _ = mgp.test_block_model(x_test)
-            list_means.append(test_mean_list)
-            list_covariance_matrix.append(test_covar_matrix_list)
+        test_mean_list, test_covar_matrix_list, _ = mgp.test_block_model(x_test)
+        list_means.append(test_mean_list)
+        list_covariance_matrix.append(test_covar_matrix_list)
+
+    if nb_selected_points == None:
+        nb_peaks_selected = x_train.shape[0]
+    if nb_peaks_selected == None:
+        nb_peaks_selected = 0
 
 
-    if save_h5:
+    if not os.path.exists('output_models'):
+        os.makedirs('output_models')
 
-        if nb_selected_points == None:
-            nb_peaks_selected = x_train.shape[0]
-        if nb_peaks_selected == None:
-            nb_peaks_selected = 0
 
-        h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
-                                  %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
+    h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
+                              %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
 
-        h5_dataset = h5py.File(h5_dataset_path, 'w')
+    h5_dataset = h5py.File(h5_dataset_path, 'w')
 
-        for i in range(len(block_indices)):
-            cur_mean = np.array([list_means[j][i] for j in range(y_train.shape[0])])
-            cur_covariance = np.array([list_covariance_matrix[j][i] for j in range(y_train.shape[0])])
+    for i in range(len(block_indices)):
+        cur_mean = np.array([list_means[j][i] for j in range(y_train.shape[0])])
+        cur_covariance = np.array([list_covariance_matrix[j][i] for j in range(y_train.shape[0])])
 
-            h5_dataset.create_dataset('mean_block_%d'%i, data=cur_mean)
-            h5_dataset.create_dataset('covar_block_%d'%i, data=cur_covariance)
-        h5_dataset.close()
+        h5_dataset.create_dataset('mean_block_%d'%i, data=cur_mean)
+        h5_dataset.create_dataset('covar_block_%d'%i, data=cur_covariance)
+    h5_dataset.close()
 
-        return h5_dataset_path
+    return h5_dataset_path
 
 
 

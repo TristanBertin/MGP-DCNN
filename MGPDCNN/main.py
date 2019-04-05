@@ -1,15 +1,17 @@
 
+
+from .TNN import Time_Neural_Network
+from .MGP import train_Block_MGP_multiple_individuals
+import .data_processing
+
 import torch
 import gpytorch
 import numpy as np
 import matplotlib.pyplot as plt
-from MGP import Block_MGP, train_Block_MGP_multiple_individuals
 from skopt.space import Real, Integer
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
-import data_processing
 import math
 import h5py
-from TNN import Time_Neural_Network
 import numpy as np
 
 
@@ -45,11 +47,11 @@ assert(np.concatenate(block_indices).shape[0] == nb_input_tasks)
 nb_blocks = len(block_indices)
 
 
-new_h5 = True
+new_h5 = False
 n_iter = 500
 learning_rate_gp = 0.02
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.31,0.1))
-nb_samples_per_id = 10
+nb_samples_per_id = 50
 
 
 ###############            WE SCALE THE DATA BASED ON THE TRAINING SET      ##################
@@ -72,7 +74,7 @@ if new_h5 == True:
     h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
                                                        kernel=time_kernel, learning_rate=learning_rate_gp, n_iter=n_iter,
                                                        nb_selected_points = nb_selected_points, nb_peaks_selected = nb_peaks_selected,
-                                                       save_h5 = True, activate_plot=True, smart_end = True)
+                                                       activate_plot=True, smart_end = True)
     print(h5_dataset_path)
 
 else :
@@ -95,6 +97,9 @@ x_train, y_train, x_val, y_val, x_test, y_test = \
                                                           nb_samples_per_id=nb_samples_per_id,
                                                           plot_some_posteriors = True)
 
+plt.plot(x_train[15,:,0])
+plt.plot(y_train[15,:,0])
+plt.show()
 
 
 dim_learning_rate = Real(low=2e-3, high=1.2e-2, prior='log-uniform', name='learning_rate')
@@ -105,7 +110,6 @@ dim_kernel_size = Integer(low=2, high=4, name='kernel_size')
 dim_dilation_factor = Integer(low=2, high=4, name='kernel_size')
 parameters_range = [dim_learning_rate,dim_nb_hidden_layers,dim_nb_filters,dim_regularizer_coef, dim_kernel_size, dim_dilation_factor]
 default_parameters = [2e-3, 4, 7, 4e-7, 2, 4]
-
 
 
 

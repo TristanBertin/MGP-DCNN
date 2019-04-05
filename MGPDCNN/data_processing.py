@@ -174,7 +174,8 @@ def from_samples_vector_to_final_array(vector, num_tasks):
 
 def import_and_split_data_train_val_test(output_gp_path, y_true, block_indices, nb_timesteps, nb_tasks,
                                          nb_individuals, nb_individuals_train, nb_individuals_val, nb_individuals_test,
-                                         nb_samples_per_id=0, plot_some_posteriors= False):
+                                         nb_samples_per_id=1, plot_some_posteriors= False):
+
     y_gp_mean = []
     y_gp_covar_matrix = []
 
@@ -214,16 +215,16 @@ def import_and_split_data_train_val_test(output_gp_path, y_true, block_indices, 
 
         for i in range(nb_individuals):
             for j in range(len(block_indices)):
-                #FIXME : WHY ARE THE VARIATIONS THAT HUGE ?!( COVAR MATRIX DIVIDED BY 30 TO LIMIT THE EFFECT)
+                #FIXME : WHY ARE THE VARIATIONS THAT HUGE ?!( COVAR MATRIX DIVIDED BY 50 TO LIMIT THE EFFECT)
                 samples_cur = generate_samples_single_id_with_covar_matrix_2(y_gp_mean[j][i].reshape(-1),
-                                                                             y_gp_covar_matrix[j][i]/30,
+                                                                             y_gp_covar_matrix[j][i]/50,
                                                                              num_samples=nb_samples_per_id).reshape(-1,nb_timesteps,len(block_indices[j]))
                 y_out_of_gp[i, :, :, np.array(block_indices[j])] = np.swapaxes(np.swapaxes(samples_cur,0,-1),1,2)
 
 
         if plot_some_posteriors==True:
             id = random.randint(0,nb_individuals-1)
-            fig,ax = plt.subplots(nb_tasks)
+            fig,ax = plt.subplots(nb_tasks, figsize=(15,9))
             for j in range(nb_tasks):
                 for i in range(nb_samples_per_id//7):
                     ax[j].plot(y_out_of_gp[id, i, :, j])

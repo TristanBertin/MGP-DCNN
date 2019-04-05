@@ -1,6 +1,7 @@
 import random
 
 from .TNN_subclasses import RNN_time_prediction, CNN_time_prediction
+
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 import time
 import os
@@ -67,7 +68,6 @@ class Time_Neural_Network():
         ###########################                   BUILD MODEL                     #############################
 
         if self.model_type == 'RNN':
-            print('--------------------- RNN ----------------------')
             self.model = RNN_time_prediction(nb_time_steps = self.nb_time_steps,
                                         nb_tasks_input = self.nb_tasks_input,
                                         nb_tasks_output= self.nb_tasks_output,
@@ -78,7 +78,6 @@ class Time_Neural_Network():
 
 
         if self.model_type == 'CNN':
-            print('--------------------- CNN ----------------------')
             if kernel_size == 0:
                 raise ValueError('CNN model needs a kernel_size different from 0')
 
