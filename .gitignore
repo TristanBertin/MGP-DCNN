@@ -4,4 +4,7 @@
 *.jpg
 
 *.h5
-output_models/*
+
+*output_models/
+*best-models/
+*plots/
