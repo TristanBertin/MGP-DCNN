@@ -5,6 +5,8 @@
 
 *.h5
 
-output_models/
-best-models/
-plots/
+*output_models/
+*best-models/
+*data/
+*my_pictures/
+*plots/
