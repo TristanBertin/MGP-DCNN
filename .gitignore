@@ -2,11 +2,11 @@
 *.JPG
 *.png
 *.jpg
-
+*.pickle
 *.h5
 
-*output_models/
-*best-models/
-*data/
-*my_pictures/
-*plots/
+*/output_models/
+*/best-models/
+*/data/
+*/my_pictures/
+*/plots/
