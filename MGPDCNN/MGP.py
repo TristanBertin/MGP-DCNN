@@ -1,6 +1,6 @@
 
-from .MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
-from .data_processing import change_representation_covariance_matrix
+from MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
+from data_processing import change_representation_covariance_matrix
 
 import torch
 import gpytorch

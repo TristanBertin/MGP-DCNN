@@ -1,6 +1,6 @@
 import random
 
-from .TNN_subclasses import RNN_time_prediction, CNN_time_prediction
+from TNN_subclasses import RNN_time_prediction, CNN_time_prediction
 
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 import time

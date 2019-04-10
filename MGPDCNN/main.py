@@ -1,8 +1,8 @@
 
 
-from .TNN import Time_Neural_Network
-from .MGP import train_Block_MGP_multiple_individuals
-import .data_processing
+from TNN import Time_Neural_Network
+from MGP import train_Block_MGP_multiple_individuals
+import data_processing
 
 import torch
 import gpytorch
@@ -22,20 +22,20 @@ data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub
 with h5py.File(data_file, 'r') as data:
     y_data = data['x_data'][:]
 
-y_data = y_data[:3]
+# y_data = y_data[:3]
 
 y_data_shape = y_data.shape
 
-nb_individuals = 3
-nb_individuals_train = 1
-nb_individuals_val = 1
-nb_individuals_test = 1
+nb_individuals = 60
+nb_individuals_train = 40
+nb_individuals_val = 10
+nb_individuals_test = 10
 
 nb_time_steps = 105
 nb_train_time_steps = 70
 
 nb_samples_per_id = 100
-nb_selected_points = 70
+nb_selected_points = 15
 nb_peaks_selected = 2
 nb_input_tasks = 5
 nb_output_tasks = 5
@@ -47,7 +47,7 @@ assert(np.concatenate(block_indices).shape[0] == nb_input_tasks)
 nb_blocks = len(block_indices)
 
 
-new_h5 = False
+new_h5 = True
 n_iter = 500
 learning_rate_gp = 0.02
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.31,0.1))
@@ -72,9 +72,13 @@ train_x, train_y, test_x, test_y, scaler = data_processing.prepare_data_before_G
 
 if new_h5 == True:
     h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, block_indices, test_x,
-                                                       kernel=time_kernel, learning_rate=learning_rate_gp, n_iter=n_iter,
-                                                       nb_selected_points = nb_selected_points, nb_peaks_selected = nb_peaks_selected,
-                                                       activate_plot=True, smart_end = True)
+                                                       kernel=time_kernel, 
+                                                       learning_rate=learning_rate_gp,
+                                                       n_iter=n_iter,
+                                                       nb_selected_points = nb_selected_points,
+                                                       nb_peaks_selected = nb_peaks_selected,
+                                                       activate_plot=False,
+                                                       smart_end = True)
     print(h5_dataset_path)
 
 else :
@@ -82,6 +86,8 @@ else :
                       %(nb_individuals, nb_time_steps, nb_selected_points, nb_blocks, nb_peaks_selected)
 
 
+
+print(sdfsdfsdf)
 y_data = scaler.transform(y_data.reshape(-1,5)).reshape(-1,105,5)
 
 x_train, y_train, x_val, y_val, x_test, y_test = \
