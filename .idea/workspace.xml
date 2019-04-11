@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a5aac54-13c4-4540-b093-e9f9c6ee6d97" name="Default Changelist" comment="" />
+    <list default="true" id="8a5aac54-13c4-4540-b093-e9f9c6ee6d97" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/figures/ED_sampling_2.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/figures/architecture.PNG" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGPDCNN/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -54,6 +57,48 @@
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="99" column="27" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1190">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multi_tasks_single_id.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="41" column="24" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-651">
+              <caret line="3" column="46" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -96,9 +141,9 @@
       <find>35</find>
       <find>align</find>
       <find>e-</find>
-      <find>data_processing</find>
       <find>30</find>
       <find>prev_layer</find>
+      <find>data_processing</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -126,14 +171,16 @@
         <option value="$PROJECT_DIR$/MGPDCNN/MGP.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/test.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/main.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="780" />
-    <option name="y" value="173" />
-    <option name="width" value="1157" />
-    <option name="height" value="1167" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -152,6 +199,12 @@
               <item name="MGP-DCNN" type="b2602c69:ProjectViewProjectNode" />
               <item name="MGP-DCNN" type="462c0819:PsiDirectoryNode" />
               <item name="MGPDCNN" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MGP-DCNN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MGP-DCNN" type="462c0819:PsiDirectoryNode" />
+              <item name="MGPDCNN" type="462c0819:PsiDirectoryNode" />
+              <item name="benchmarks" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -176,7 +229,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main (1)">
+  <component name="RunManager" selected="Python.clue_data_analysis">
     <configuration name="MGP (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MGP-DCNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -198,7 +251,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="data_processing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="clue_data_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MGP-DCNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -206,11 +259,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGP-DCNN" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGPDCNN" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGP-DCNN/data_processing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -284,11 +337,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.clue_data_analysis" />
         <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.MGP (1)" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.data_processing" />
       </list>
     </recent_temporary>
   </component>
@@ -310,7 +363,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14646997" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14646997" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -318,7 +371,7 @@
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33269414" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.33269414" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39980826" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -476,6 +529,40 @@
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="99" column="27" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multi_tasks_single_id.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="41" column="24" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-651">
+          <caret line="3" column="46" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="46" />
         </state>
       </provider>
     </entry>
