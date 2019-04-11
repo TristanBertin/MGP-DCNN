@@ -1,7 +1,9 @@
-*.PNG
-*.JPG
-*.png
-*.jpg
+# *.PNG
+# *.JPG
+# *.png
+# *.jpg
+
+
 *.pickle
 *.h5
 
