@@ -215,9 +215,9 @@ def import_and_split_data_train_val_test(output_gp_path, y_true, block_indices, 
 
         for i in range(nb_individuals):
             for j in range(len(block_indices)):
-                #FIXME : WHY ARE THE VARIATIONS THAT HUGE ?!( COVAR MATRIX DIVIDED BY 50 TO LIMIT THE EFFECT)
+                #FIXME : WHY ARE THE VARIATIONS THAT HUGE ?!( COVAR MATRIX DIVIDED BY 100 TO LIMIT THE EFFECT)
                 samples_cur = generate_samples_single_id_with_covar_matrix_2(y_gp_mean[j][i].reshape(-1),
-                                                                             y_gp_covar_matrix[j][i]/50,
+                                                                             y_gp_covar_matrix[j][i]/400,
                                                                              num_samples=nb_samples_per_id).reshape(-1,nb_timesteps,len(block_indices[j]))
                 y_out_of_gp[i, :, :, np.array(block_indices[j])] = np.swapaxes(np.swapaxes(samples_cur,0,-1),1,2)
 

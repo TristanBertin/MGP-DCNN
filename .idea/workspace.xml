@@ -2,7 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a5aac54-13c4-4540-b093-e9f9c6ee6d97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MGPDCNN/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/expected_distance.py" beforeDir="false" afterPath="$PROJECT_DIR$/MGPDCNN/expected_distance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_17.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_18.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_19.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_20.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_21.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_22.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_23.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_24.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_25.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_26.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_27.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_28.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_29.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_30.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_31.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_33.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_34.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_35.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_36.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MGPDCNN/step_by_step_acquisition_plots/nb_points_9.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGPDCNN/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="189">
+              <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
               <folding>
                 <element signature="e#2#37#0" expanded="true" />
               </folding>
@@ -25,12 +60,69 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/MGP_subclasses.py">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+            <state relative-caret-position="-2109">
+              <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
               <folding>
-                <element signature="e#0#12#0" expanded="true" />
+                <element signature="e#1#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/main_2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="66" selection-start-line="66" selection-end-line="66" />
+              <folding>
+                <element signature="e#2#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/main_3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="58" selection-start-line="58" selection-end-line="58" selection-end-column="33" />
+              <folding>
+                <element signature="e#2#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="867">
+              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+              <folding>
+                <element signature="e#1#12#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED_2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED_3.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+              <folding>
+                <element signature="e#1#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,91 +131,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MGPDCNN/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+            <state relative-caret-position="572">
+              <caret line="183" selection-start-line="183" selection-end-line="183" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/MGP.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="376">
+              <caret line="306" column="41" selection-start-line="306" selection-start-column="41" selection-end-line="306" selection-end-column="41" />
+              <folding>
+                <element signature="e#1#68#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/create_data.py">
+        <entry file="file://$PROJECT_DIR$/MGPDCNN/expected_distance.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1870">
-              <caret line="110" column="22" lean-forward="true" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
-              <folding>
-                <element signature="e#86#132#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
-              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="742">
+              <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
               <folding>
                 <element signature="e#1#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multi_tasks_single_id.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="41" column="24" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="35" column="46" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-705">
-              <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_RNN_MC/TNN_models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
-              <folding>
-                <element signature="e#1#170#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,6 +187,24 @@
       <find>split_data_single_file</find>
       <find>data_processing</find>
       <find>shuffle</find>
+      <find>2.5</find>
+      <find>activ</find>
+      <find>output_plo</find>
+      <find>patie</find>
+      <find>100</find>
+      <find>dilat</find>
+      <find>patien</find>
+      <find>50</find>
+      <find>1000</find>
+      <find>covar</find>
+      <find>plot</find>
+      <find>verbose</find>
+      <find>show</find>
+      <find>104</find>
+      <find>105</find>
+      <find>140</find>
+      <find>smart</find>
+      <find>HHHHH</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,30 +227,41 @@
         <option value="$PROJECT_DIR$/MGP-DCNN/main.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/__init__.py" />
         <option value="$PROJECT_DIR$/setup.py" />
-        <option value="$PROJECT_DIR$/MGPDCNN/data_processing.py" />
-        <option value="$PROJECT_DIR$/MGPDCNN/TNN.py" />
-        <option value="$PROJECT_DIR$/MGPDCNN/MGP.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/test.py" />
-        <option value="$PROJECT_DIR$/MGPDCNN/main.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/utils.py" />
         <option value="$PROJECT_DIR$/MGPDCNN/create_data.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/testy_2.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/testy.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/pour_le_petit.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/data_processing.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/TNN.py" />
+        <option value="$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/utils.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/autoencoder.py" />
+        <option value="$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/Data_selection_acquisition_function.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main_with_ED_2.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main_with_ED_3.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main_3.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main_2.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/MGP.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main_with_ED.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/main.py" />
+        <option value="$PROJECT_DIR$/MGPDCNN/expected_distance.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1176" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-21" />
+    <option name="y" value="302" />
+    <option name="width" value="1813" />
+    <option name="height" value="1119" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,14 +269,20 @@
               <item name="MGP-DCNN" type="b2602c69:ProjectViewProjectNode" />
               <item name="MGP-DCNN" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MGP-DCNN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MGP-DCNN" type="462c0819:PsiDirectoryNode" />
+              <item name="MGPDCNN" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_multitask/GP_independant_task_single_id.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dev_tristan_4_11_2019" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -228,8 +298,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.clue_data_analysis">
-    <configuration name="MGP (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.expected_distance">
+    <configuration name="expected_distance" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MGP-DCNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -241,7 +311,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/MGP.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/expected_distance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -250,28 +320,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="clue_data_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MGP-DCNN" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGPDCNN" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MGP-DCNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -292,28 +341,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MGP-DCNN" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGP-DCNN" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGP-DCNN/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="main_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MGP-DCNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -325,7 +353,49 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/main_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_with_ED_2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MGP-DCNN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGPDCNN" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/main_with_ED_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_with_ED_3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MGP-DCNN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MGPDCNN" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MGPDCNN/main_with_ED_3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -336,11 +406,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.clue_data_analysis" />
-        <item itemvalue="Python.main (1)" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.MGP (1)" />
+        <item itemvalue="Python.expected_distance" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.main_2" />
+        <item itemvalue="Python.main_with_ED_3" />
+        <item itemvalue="Python.main_with_ED_2" />
       </list>
     </recent_temporary>
   </component>
@@ -362,15 +432,15 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14646997" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14646997" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.32981783" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="2" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.32981783" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
       <window_info anchor="bottom" id="Version Control" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.33269414" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.33557048" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.39980826" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -381,38 +451,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP/data_processing.py" />
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/text.py" />
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP/models.py" />
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/MGP_DCNN/MGP/main.py" />
-    <entry file="file://$PROJECT_DIR$/MGP_DCNN/text.py" />
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP/main.py" />
-    <entry file="file://$PROJECT_DIR$/MGP_DCNN/main.py" />
-    <entry file="file://$PROJECT_DIR$/MGP_DCNN/data_processing.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.3/system/python_stubs/-1263262760/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1969">
-          <caret line="310" column="4" selection-start-line="310" selection-start-column="4" selection-end-line="310" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGP-DCNN/MGP_methods.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/Lib/site-packages/numpy/core/numeric.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15456">
-          <caret line="380" selection-start-line="380" selection-end-line="380" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/Lib/site-packages/numpy/core/shape_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="338" selection-start-line="338" selection-end-line="338" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/DCNN.py" />
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/DCNN_methods.py" />
     <entry file="file://$PROJECT_DIR$/MGP-DCNN/utils.py" />
@@ -436,12 +474,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/MGP.py">
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
+        <state relative-caret-position="17">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
-            <element signature="e#1#68#0" expanded="true" />
+            <element signature="e#0#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_multitask/GP_multitask_single_id_2.py" />
+    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_multitask/GP_independant_task_single_id.py" />
+    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_RNN_MC/TNN_models.py" />
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/test.py" />
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/utils.py" />
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/testy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="906">
+          <caret line="201" selection-start-line="201" selection-end-line="201" />
+          <folding>
+            <element signature="e#2#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multi_tasks_single_id.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="41" column="24" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="37" column="35" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multitask_single_id_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/envs/tristan/Lib/site-packages/h5py/_hl/group.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="621" column="13" lean-forward="true" selection-start-line="621" selection-start-column="13" selection-end-line="621" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/testy_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#2#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/pour_le_petit.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/create_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="94" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="e#86#132#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/envs/tristan/Lib/site-packages/keras/engine/training_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/envs/tristan/Lib/site-packages/keras/layers/convolutional.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="320" column="8" selection-start-line="320" selection-start-column="8" selection-end-line="320" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/autoencoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/testt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="47" column="14" lean-forward="true" selection-start-line="47" selection-start-column="14" selection-end-line="47" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN_subclasses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="e#0#169#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -456,134 +637,163 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN.py">
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/utils/data_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-705">
-          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+        <state relative-caret-position="51">
+          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN_subclasses.py">
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/point_relevance.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="-1748">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
-            <element signature="e#0#47#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_multitask/GP_multitask_single_id_2.py">
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/point_relevance_IVM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="129" column="32" selection-start-line="129" selection-start-column="32" selection-end-line="129" selection-end-column="32" />
+        <state relative-caret-position="442">
+          <caret line="80" column="44" selection-start-line="80" selection-start-column="44" selection-end-line="80" selection-end-column="44" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_multitask/GP_independant_task_single_id.py">
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/MGP_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="132" selection-start-line="132" selection-end-line="134" />
+        <state relative-caret-position="2771">
+          <caret line="163" column="49" selection-start-line="163" selection-start-column="49" selection-end-line="163" selection-end-column="49" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../myhmc/dev_tristan/Data_prediction/MGP/GP_RNN_MC/TNN_models.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/miniconda3/envs/tristan/Lib/site-packages/gpytorch/lazy/lazy_tensor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
+        <state relative-caret-position="492">
+          <caret line="732" lean-forward="true" selection-start-line="732" selection-end-line="732" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/Data_selection_acquisition_function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="53" column="53" lean-forward="true" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
           <folding>
-            <element signature="e#1#170#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/test.py" />
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/main.py">
+    <entry file="file://$PROJECT_DIR$/../dev_tristan_4_11_2019/Data_prediction/MGP/GP_RNN_MC/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        <state relative-caret-position="3841">
+          <caret line="268" column="10" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
           <folding>
-            <element signature="e#2#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/clue_data_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/data_processing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-          <folding>
-            <element signature="e#1#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="35" column="46" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/benchmarks/GP_multi_tasks_single_id.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="41" column="24" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MGPDCNN/data_processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+        <state relative-caret-position="572">
+          <caret line="183" selection-start-line="183" selection-end-line="183" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MGPDCNN/create_data.py">
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED_3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1870">
-          <caret line="110" column="22" lean-forward="true" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+        <state relative-caret-position="152">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
           <folding>
-            <element signature="e#86#132#0" expanded="true" />
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/MGP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="306" column="41" selection-start-line="306" selection-start-column="41" selection-end-line="306" selection-end-column="41" />
+          <folding>
+            <element signature="e#1#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main_2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+          <folding>
+            <element signature="e#2#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main_3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="58" selection-start-line="58" selection-end-line="58" selection-end-column="33" />
+          <folding>
+            <element signature="e#2#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/TNN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2109">
+          <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+          <folding>
+            <element signature="e#1#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+          <folding>
+            <element signature="e#2#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/main_with_ED.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MGPDCNN/expected_distance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="742">
+          <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+          <folding>
+            <element signature="e#1#19#0" expanded="true" />
           </folding>
         </state>
       </provider>

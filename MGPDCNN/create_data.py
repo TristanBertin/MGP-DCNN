@@ -26,7 +26,7 @@ def data_loader_variable_length(data_folder_path, nb_data_subsets, time_length_s
     :param time_length_sequence: total length period of a sequence (it means how many days between the first sample and the last one)
     :param sampling_frequency : we pick 1/sampling_frequency points (it means if =1, we take all the samples, if 2 , we take one over two)
     :return: a .h5 file that contains all the data with x_data[Nb_files, Nb_data_subsets, Nb_time_steps, Nb_hormones]
-            and y_data a matrix with the associated parameters [Nb_files, Nb-parameters]---> we generate many subset with
+            and y_data a matrix with the associated parameters [Nb_files, Nb-parameters]---> we can generate many subset with
             random starting points
 
     IMPORTANT

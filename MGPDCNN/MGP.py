@@ -54,7 +54,7 @@ class Block_MGP():
         mll = gpytorch.mlls.ExactMarginalLogLikelihood(self.likelihood[block_number], self.model[block_number])
         loss_list_cur = []
 
-        plot_frequency = self.n_training_iter // 5
+        plot_frequency = self.n_training_iter // 10
 
         if smart_end:
             loss_hist = 0
@@ -64,9 +64,9 @@ class Block_MGP():
             output = self.model[block_number](x_train)
             loss = -mll(output, y_train)
 
-            if i>30 and smart_end:
+            if i>120 and smart_end:
                 min_loss_variation = np.min(np.array(loss_list_cur[1:30])-np.array(loss_list_cur[0:29]))
-                if loss - loss_hist > - 2.5 * min_loss_variation :
+                if loss - loss_hist > - 2.5*min_loss_variation :
                     break
                 else:
                     loss.backward()
@@ -196,7 +196,7 @@ class Block_MGP():
 def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test,
                                          kernel, learning_rate, n_iter,
                                          nb_selected_points = None, nb_peaks_selected = None,
-                                         activate_plot=False, smart_end = False):
+                                         activate_plot=False, smart_end = False, sampling_order = None):
     '''
     :param x_train: array size nb_timesteps_test * 1, represents time
     :param y_train: array size nb_individuals * nb_timesteps_test * number_tasks, represents time
@@ -218,7 +218,6 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
             a[i].append(flat_block_indices.index(block_indices[i][j]))
     block_indices = a
 
-
     if len(x_train.shape)>1:
         raise ValueError('Wrong dimensions for the input X_train, x_train should be a 1D Vector')
     if len(x_test.shape)>1:
@@ -238,7 +237,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
 
     for i in range(nb_individuals):
 
-        if nb_selected_points != None: # WE SELECT A SUBSET OF POINTS
+        if nb_selected_points != None and sampling_order==None: # WE SELECT A SUBSET OF POINTS
 
             if nb_peaks_selected != None:  # we select the peaks of the id_curve_peaks th curve
 
@@ -264,8 +263,12 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
             x_train_cur = x_train[filter]
             y_train_cur = y_train[i, filter]
 
-        if nb_selected_points == None: # WE SELECT ALL THE POINTS
 
+        if sampling_order != None and nb_selected_points != None:
+            x_train_cur = x_train[sampling_order[:nb_selected_points]]
+            y_train_cur = y_train[i, sampling_order[:nb_selected_points]]
+
+        if sampling_order == None and nb_selected_points == None:
             x_train_cur = x_train
             y_train_cur = y_train[i]
             filter = np.arange(x_train.shape[0])
@@ -282,17 +285,23 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
         list_means.append(test_mean_list)
         list_covariance_matrix.append(test_covar_matrix_list)
 
-    if nb_selected_points == None:
-        nb_peaks_selected = x_train.shape[0]
+        # plt.plot(test_mean_list[0][:,0])
+        # plt.plot(y_train.detach().numpy()[i,:,0])
+        # plt.scatter(x_train_cur.detach().numpy()*105, y_train_cur.detach().numpy()[:,0])
+        # plt.show()
+
     if nb_peaks_selected == None:
         nb_peaks_selected = 0
 
+    if not os.path.exists('output_GP'):
+        os.makedirs('output_GP')
 
-    if not os.path.exists('output_models'):
-        os.makedirs('output_models')
+    if sampling_order != None :
+        h5_dataset_path = str('output_GP/ED_SAMPLING_OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
+                              %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
 
-
-    h5_dataset_path = str('output_models/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
+    else:
+        h5_dataset_path = str('output_GP/OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'
                               %(nb_individuals, x_test.shape[0], nb_selected_points, len(block_indices), nb_peaks_selected))
 
     h5_dataset = h5py.File(h5_dataset_path, 'w')
@@ -306,6 +315,8 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
     h5_dataset.close()
 
     return h5_dataset_path
+
+
 
 
 

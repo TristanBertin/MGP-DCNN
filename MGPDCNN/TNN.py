@@ -1,13 +1,14 @@
+
 import random
-
 from TNN_subclasses import RNN_time_prediction, CNN_time_prediction
-
+import numpy as np
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 import time
 import os
 from skopt.plots import plot_convergence
 from skopt import gp_minimize
 import matplotlib.pyplot as plt
+
 
 
 class Time_Neural_Network():
@@ -109,7 +110,7 @@ class Time_Neural_Network():
                 filepath="best_models/%s_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d.h5" %
                          (self.model_type, self.nb_selected_points,self.nb_time_steps, self.nb_peaks_selected),
                 monitor='val_loss', save_best_only=True),
-            EarlyStopping(monitor='acc', patience=15)]
+            EarlyStopping(monitor='acc', patience=5)]
 
         t1 = time.time()
         x_train = self.x_train
@@ -127,18 +128,21 @@ class Time_Neural_Network():
             "best_models/%s_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d.h5" %
             (self.model_type, self.nb_selected_points, self.nb_time_steps, self.nb_peaks_selected))
 
-        val_loss = self.model.evaluate(self.x_val, self.y_val, verbose=0)[0]
-
+        vali_out = self.model.predict(self.x_val)
+        test_out = self.model.predict(self.x_test)
+        val_loss = self.compute_loss(vali_out, self.y_val)
+        test_loss = self.compute_loss(test_out, self.y_test)
 
         print('Time', self.training_time, 'Learning_rate', self.learning_rate, '|| nb_layers', self.nb_layers, '|| nb_filters',
               self.nb_filters, '|| kernel_size', self.kernel_size, '|| regularizer_coef', self.regularizer_coef,
-              '|| VAL LOSS', val_loss)
+              '|| VAL LOSS', val_loss, '         ||TEST LOSS', test_loss)
+
+        print('LOSS WITHOUT CNN ---- VAL', self.compute_loss(self.x_val, self.y_val), 'TEST', self.compute_loss(self.x_test, self.y_test))
 
         if regression_plot == True:
             output_test = self.model.predict(self.x_val)
             output_train = self.model.predict(self.x_train)
             self.output_plots(self.x_train, self.y_train, output_train, self.x_val, self.y_val, output_test, val_loss)
-
 
         self.params_history.append([self.learning_rate, self.nb_layers, self.nb_filters, self.kernel_size, self.regularizer_coef, val_loss])
 
@@ -181,36 +185,51 @@ class Time_Neural_Network():
             os.makedirs('plots')
 
         fig, axes = plt.subplots(ncols=5, nrows=5, figsize=(20, 10))
-        for j in range(5):
+        j = 0
+        while j<5:
             id = random.randint(0, x_test.shape[0] - 1)
 
-            for i in range(5):
-                axes[i, j].set_title('H_%d Id_%d' % (i, id))
-                axes[i, j].plot(output_test[id, :, i], 'orange', label='prediction RNN')
-                axes[i, j].plot(x_test[id, :, i], label='prediction GP')
-                axes[i, j].plot(y_test[id, :, i], label='truth')
-                axes[i, j].legend()
-        fig.suptitle('Test')
+            if np.max(y_test[id,:,0]) > 0.4:
+                for i in range(5):
+                    axes[i, j].set_title('H_%d Id_%d' % (i, id))
+                    axes[i, j].plot(output_test[id, :, i], 'orange', label='prediction RNN')
+                    axes[i, j].plot(x_test[id, :, i], label='prediction GP')
+                    axes[i, j].plot(y_test[id, :, i], label='truth')
+                    axes[i, j].legend()
+                fig.suptitle('Test')
+
+                j = j + 1
+
+            else:
+                pass
+
         plt.savefig('plots/%s_LOSS_%d_TEST_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d' %
-                    (self.model_type, score * 1000, self.nb_selected_points, self.nb_time_steps,
+                    (self.model_type, score * 10000, self.nb_selected_points, self.nb_time_steps,
                      self.nb_peaks_selected))
         plt.close(fig)
         plt.close()
 
-        fig, axes = plt.subplots(ncols=5, nrows=5, figsize=(20, 10))
-        for j in range(5):
-            id = random.randint(0, x_train.shape[0] - 1)
-            for i in range(5):
-                axes[i, j].set_title('H_%d Id_%d' % (i, id))
-                axes[i, j].plot(output_train[id, :, i], 'orange', label='prediction RNN')
-                axes[i, j].plot(x_train[id, :, i], label='prediction GP')
-                axes[i, j].plot(y_train[id, :, i], label='truth')
-                axes[i, j].legend()
-        fig.suptitle('Train')
-        plt.savefig('plots/%s_LOSS_%d_TRAIN_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d' %
-                    (self.model_type, score * 1000, self.nb_selected_points, self.nb_time_steps,
-                     self.nb_peaks_selected))
-        plt.close()
+
+        # fig, axes = plt.subplots(ncols=5, nrows=5, figsize=(20, 10))
+        # for j in range(5):
+        #     id = random.randint(0, x_train.shape[0] - 1)
+        #     for i in range(5):
+        #         axes[i, j].set_title('H_%d Id_%d' % (i, id))
+        #         axes[i, j].plot(output_train[id, :, i], 'orange', label='prediction RNN')
+        #         axes[i, j].plot(x_train[id, :, i], label='prediction GP')
+        #         axes[i, j].plot(y_train[id, :, i], label='truth')
+        #         axes[i, j].legend()
+        # fig.suptitle('Train')
+        # plt.savefig('plots/%s_LOSS_%d_TRAIN_nb_selected_points_%d_Txy_%d_nb_peaks_selected_%d' %
+        #             (self.model_type, score * 10000, self.nb_selected_points, self.nb_time_steps,
+        #              self.nb_peaks_selected))
+        # plt.close()
+
+
+    def compute_loss(self, target, prediction):
+        assert(target.shape == prediction.shape)
+        return np.mean((target - prediction)**2)
+
 
 
 
