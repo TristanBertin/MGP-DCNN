@@ -1,6 +1,6 @@
 
-from MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
-from data_processing import change_representation_covariance_matrix
+from .MGP_subclasses import Multitask_GP_Model, Single_task_GP_model
+from .data_processing import change_representation_covariance_matrix
 
 import torch
 import gpytorch
@@ -267,6 +267,7 @@ def train_Block_MGP_multiple_individuals(x_train, y_train, block_indices, x_test
         if sampling_order != None and nb_selected_points != None:
             x_train_cur = x_train[sampling_order[:nb_selected_points]]
             y_train_cur = y_train[i, sampling_order[:nb_selected_points]]
+            filter = sampling_order[:nb_selected_points]
 
         if sampling_order == None and nb_selected_points == None:
             x_train_cur = x_train

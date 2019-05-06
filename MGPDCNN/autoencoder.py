@@ -33,7 +33,7 @@ y_test = y_data[50:60]
 
 in_shape = 102
 
-mask = np.random.choice([0, 1], size=(y_train.shape[0],in_shape), p=[0, 1])
+mask = np.random.choice([0, 1], size=(y_train.shape[0],in_shape), p=[2/3, 1/3])
 mask = np.tile(mask[..., None], (1,1,5))
 y_train_input = y_train[:,:in_shape] * mask
 
@@ -59,12 +59,12 @@ def autoencoder_CNN(nb_time_inputs):
 
     input = Input(shape=(nb_time_inputs,5))
 
-    x = Conv1D(3, (5,), activation='relu', padding='same')(input)
-    x = MaxPooling1D(pool_size=3)(x)
+    x = Conv1D(1, (10,), activation='relu', padding='same')(input)
+    x = MaxPooling1D(pool_size=2)(x)
 
     # decoder
-    x = Conv1D(5, (5,), activation='relu', padding='same')(x)
-    x = UpSampling1D(3)(x)
+    x = Conv1D(5, (10,), activation='relu', padding='same')(x)
+    x = UpSampling1D(2)(x)
 
 
     model = Model(input, x, name='autoencoder')
@@ -83,7 +83,7 @@ callbacks_list = [
     ModelCheckpoint(
         filepath="best_auto.h5",
         monitor='val_loss', save_best_only=True),
-    EarlyStopping(monitor='acc', patience=25)]
+    EarlyStopping(monitor='acc', patience=100)]
 
 if training:
     model.fit(y_train_input, y_train[:,:in_shape],
@@ -95,7 +95,7 @@ if training:
 
 model.load_weights("best_auto.h5")
 
-mask = np.random.choice([0, 1], size=(y_test.shape[0],in_shape), p=[0, 1])
+mask = np.random.choice([0, 1], size=(y_test.shape[0],in_shape), p=[2/3, 1/3])
 mask = np.tile(mask[..., None], (1,1,5))
 y_test_in = y_test[:,:in_shape] * mask
 

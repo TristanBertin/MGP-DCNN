@@ -2,12 +2,12 @@
 import h5py
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, RobustScaler
-import data_processing
+import .data_processing
 from scipy.signal import resample, find_peaks
-from MGP import train_Block_MGP_multiple_individuals
+from .MGP import train_Block_MGP_multiple_individuals
 import gpytorch
 
-data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub_1_T_150_freq_1'
+data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/dataset_N_60_Sub_1_T_150_freq_1'
 sampling_list = [0, 35, 2, 69, 36, 6, 4, 8, 10, 12, 29, 67, 27, 23, 14, 19, 25, 52, 37, 33, 21, 55, 30, 59, 1, 68, 34, 38, 51, 3, 7, 40, 43, 47, 45, 28, 49]
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.31,0.1))
 
@@ -53,7 +53,7 @@ h5_dataset_path = train_Block_MGP_multiple_individuals(train_x, train_y, [[0,1],
                                                        n_iter=500,
                                                        nb_selected_points=nb_selected_points,
                                                        nb_peaks_selected=2,
-                                                       activate_plot=False,
+                                                       activate_plot=True,
                                                        smart_end=True,
                                                        sampling_order=sampling_list)
 

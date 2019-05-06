@@ -1,8 +1,8 @@
 
 
-from TNN import Time_Neural_Network
-from MGP import train_Block_MGP_multiple_individuals
-import data_processing
+from .TNN import Time_Neural_Network
+from .MGP import train_Block_MGP_multiple_individuals
+import .data_processing
 from scipy.signal import resample, find_peaks
 
 import torch
@@ -18,7 +18,7 @@ import numpy as np
 
 ###################################    IMPORT DATA    #####################################
 
-data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/according_Clue_dataset_N_60_Sub_1_T_150_freq_1'
+data_file = 'C:/Users/tmb2183/Desktop/myhmc/data/dataset_N_60_Sub_1_T_150_freq_1'
 
 with h5py.File(data_file, 'r') as data:
     y_data = data['x_data'][:]
@@ -33,12 +33,12 @@ nb_individuals_test = 10
 nb_time_steps = 105
 nb_train_time_steps = 70
 
-nb_samples_per_id = 100
 nb_selected_points = 15
 nb_peaks_selected = 2
 nb_input_tasks = 5
 nb_output_tasks = 5
 
+nb_samples_per_id = 100
 
 block_indices = [[0,1],[2,3,4]]
 assert(np.concatenate(block_indices).shape[0] == nb_input_tasks)
@@ -48,11 +48,8 @@ new_h5 = True
 n_iter = 500
 learning_rate_gp = 0.015
 time_kernel = gpytorch.kernels.PeriodicKernel(period_length_prior = gpytorch.priors.NormalPrior(0.31,0.1))
-nb_samples_per_id = 100
 
 ED_SAMPLING = True
-
-
 
 ###############            WE SCALE THE DATA BASED ON THE TRAINING SET      ##################
 
@@ -85,7 +82,6 @@ else :
 y_data = scaler.transform(y_data.reshape(-1, 5)).reshape(-1, 105, 5)
 
 
-
 if ED_SAMPLING == True:
 
     h5_dataset_path = 'output_GP/ED_SAMPLING_OUTPUT_MGP_Nb_individuals_%d_Time_%d_Selected_points_%d_Nb_blocks_%d_Nb_peaks_%d'\
@@ -107,7 +103,6 @@ if ED_SAMPLING == True:
         for j in range(5):
             out_data[i,:,j] = resample(data_cur[:,j],105)
     y_data = out_data
-
 
 
 

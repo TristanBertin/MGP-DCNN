@@ -1,9 +1,9 @@
 
+import .data_processing
 import numpy as np
 from scipy.signal import resample, find_peaks
 import matplotlib.pyplot as plt
 import h5py
-import data_processing
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import torch
 import gpytorch
@@ -12,10 +12,7 @@ import h5py
 
 coef_smart = 1
 
-sampling_list = [0, 35, 37, 3, 68, 42, 65, 14, 45, 50, 34, 69, 33, 19, 24, 62, 57, 1, 32, 47, 2, 40, 38, 52, 36, 39, 30, 41, 46, 67, 31, 53, 48, 55, 8, 26, 23]
-sampling_list_2 = [0, 35, 2, 69, 36, 6, 4, 8, 10, 12, 29, 67, 27, 23, 14, 19, 25, 52, 37, 33, 21, 55, 30, 59, 1, 68, 34, 38, 51, 3, 7, 40, 43, 47, 45, 28, 49]
-
-[0, 35, 2, 36, 34, 6, 10, 4, 14, 33, 1, 27, 23, 37, 54]
+sampling_list = [0, 35, 2, 69, 36, 6, 4, 8, 10, 12, 29, 67, 27, 23, 14, 19, 25, 52, 37, 33, 21, 55, 30, 59, 1, 68, 34, 38, 51, 3, 7, 40, 43, 47, 45, 28, 49]
 
 
 class MultitaskGPModel(gpytorch.models.ExactGP):
