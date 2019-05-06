@@ -7,7 +7,7 @@
 *.pickle
 *.h5
 
-!dataset_N_60_Sub_1_T_150_freq_1.h5
+!dataset_N_60_Sub_1_T_150_freq_1
 
 */output_models/
 */best-models/
