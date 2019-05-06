@@ -7,10 +7,11 @@
 *.pickle
 *.h5
 
-!dataset_N_60_Sub_1_T_150_freq_1
+
 
 */output_models/
 */best-models/
 */data/
+!/data/dataset_N_60_Sub_1_T_150_freq_1
 */my_pictures/
 */plots/
